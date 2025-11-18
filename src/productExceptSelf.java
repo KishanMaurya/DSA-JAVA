@@ -28,11 +28,17 @@ public class productExceptSelf {
 
     private static int[] productsExceptSelf(int[] arr) {
         int n = arr.length;
-        int[] prefix = new int[n];
-        prefix[0] = 1;
-        for (int i =0; i < arr.length; i++){
-            prefix[i] = prefix[i - 1] * arr[i - 1];
+        int[] result = new int[n];
+        int left = 1;
+        for (int i = 0;  i < n; i++){
+            result[i] = left;
+            left*=arr[i];
         }
-        return arr;
+        int right = 1;
+        for (int i = n - 1; i>=0; i--){
+            result[i] *= right;
+            right*=arr[i];
+        }
+        return result;
     }
 }
